@@ -1,0 +1,177 @@
+{
+  "blocos": [
+    {
+      "semana_ini": "2022-09-11",
+      "semana_fim": "2022-09-17",
+      "bloco_codigo": null,
+      "c_turma_id": null,
+      "turmas_bloco": "",
+      "turma_real": "",
+      "periodo": ""
+    },
+    {
+      "semana_ini": "2022-09-18",
+      "semana_fim": "2022-12-17",
+      "bloco_codigo": null,
+      "c_turma_id": null,
+      "turmas_bloco": "",
+      "turma_real": "",
+      "periodo": ""
+    }
+  ],
+  "horario": [
+    {
+      "dia": 4,
+      "hora_inicio": 28800,
+      "ucurr_sigla": "IPC",
+      "ocorrencia_id": 501684,
+      "tipo": "T",
+      "aula_id": 6109252,
+      "aula_duracao": 1.5,
+      "sala_sigla": "B001",
+      "salas": [{ "espaco_id": 73141, "espaco_nome": "B001" }],
+      "doc_sigla": "RPR",
+      "docentes": [
+        { "doc_codigo": "466668", "doc_nome": "Rui Pedro Amaral Rodrigues" }
+      ],
+      "turma_sigla": "COMP_1732",
+      "turmas": [
+        { "turma_id": 212344, "turma_sigla": "3LEIC03" },
+        { "turma_id": 212342, "turma_sigla": "3LEIC01" },
+        { "turma_id": 212346, "turma_sigla": "3LEIC05" },
+        { "turma_id": 212348, "turma_sigla": "3LEIC07" },
+        { "turma_id": 212343, "turma_sigla": "3LEIC02" },
+        { "turma_id": 212345, "turma_sigla": "3LEIC04" },
+        { "turma_id": 212347, "turma_sigla": "3LEIC06" }
+      ],
+      "periodo": 2
+    },
+    {
+      "dia": 3,
+      "hora_inicio": 32400,
+      "ucurr_sigla": "IPC",
+      "ocorrencia_id": 501684,
+      "tipo": "TP",
+      "aula_id": 6109587,
+      "aula_duracao": 1.5,
+      "sala_sigla": "B102",
+      "salas": [{ "espaco_id": 73445, "espaco_nome": "B102" }],
+      "doc_sigla": "RPR",
+      "docentes": [
+        { "doc_codigo": "466668", "doc_nome": "Rui Pedro Amaral Rodrigues" }
+      ],
+      "turma_sigla": "3LEIC06",
+      "turmas": [{ "turma_id": 212347, "turma_sigla": "3LEIC06" }],
+      "periodo": 2
+    },
+    {
+      "dia": 4,
+      "hora_inicio": 36000,
+      "ucurr_sigla": "IPC",
+      "ocorrencia_id": 499056,
+      "tipo": "TP",
+      "aula_id": 6104119,
+      "aula_duracao": 3,
+      "sala_sigla": "B322",
+      "salas": [{ "espaco_id": 73219, "espaco_nome": "B322" }],
+      "doc_sigla": "MTD+RPR",
+      "docentes": [
+        { "doc_codigo": "237494", "doc_nome": "Maria Teresa Galv\u00E3o Dias" },
+        { "doc_codigo": "466668", "doc_nome": "Rui Pedro Amaral Rodrigues" }
+      ],
+      "turma_sigla": "2MESW01",
+      "turmas": [{ "turma_id": 211794, "turma_sigla": "2MESW01" }],
+      "periodo": 2
+    },
+    {
+      "dia": 3,
+      "hora_inicio": 37800,
+      "ucurr_sigla": "IPC",
+      "ocorrencia_id": 501684,
+      "tipo": "TP",
+      "aula_id": 6109605,
+      "aula_duracao": 1.5,
+      "sala_sigla": "B102",
+      "salas": [{ "espaco_id": 73445, "espaco_nome": "B102" }],
+      "doc_sigla": "RPR",
+      "docentes": [
+        { "doc_codigo": "466668", "doc_nome": "Rui Pedro Amaral Rodrigues" }
+      ],
+      "turma_sigla": "3LEIC09",
+      "turmas": [{ "turma_id": 212350, "turma_sigla": "3LEIC09" }],
+      "periodo": 2
+    },
+    {
+      "dia": 6,
+      "hora_inicio": 37800,
+      "ucurr_sigla": "IPC",
+      "ocorrencia_id": 501684,
+      "tipo": "T",
+      "aula_id": 6109279,
+      "aula_duracao": 1.5,
+      "sala_sigla": "B005",
+      "salas": [{ "espaco_id": 73401, "espaco_nome": "B005" }],
+      "doc_sigla": "RPR",
+      "docentes": [
+        { "doc_codigo": "466668", "doc_nome": "Rui Pedro Amaral Rodrigues" }
+      ],
+      "turma_sigla": "COMP_1487",
+      "turmas": [
+        { "turma_id": 212355, "turma_sigla": "3LEIC14" },
+        { "turma_id": 212350, "turma_sigla": "3LEIC09" },
+        { "turma_id": 212352, "turma_sigla": "3LEIC11" },
+        { "turma_id": 212351, "turma_sigla": "3LEIC10" },
+        { "turma_id": 212354, "turma_sigla": "3LEIC13" },
+        { "turma_id": 212353, "turma_sigla": "3LEIC12" },
+        { "turma_id": 212367, "turma_sigla": "3LEIC15" },
+        { "turma_id": 212349, "turma_sigla": "3LEIC08" }
+      ],
+      "periodo": 2
+    },
+    {
+      "dia": 6,
+      "hora_inicio": 50400,
+      "ucurr_sigla": "TAIM",
+      "ocorrencia_id": 501972,
+      "tipo": "TP",
+      "aula_id": 6105031,
+      "aula_duracao": 3,
+      "sala_sigla": "B103",
+      "salas": [{ "espaco_id": 73444, "espaco_nome": "B103" }],
+      "doc_sigla": "AVC+DFMTM+RPR",
+      "docentes": [
+        { "doc_codigo": "466668", "doc_nome": "Rui Pedro Amaral Rodrigues" },
+        {
+          "doc_codigo": "654576",
+          "doc_nome": "Daniel Filipe Martins Tavares Mendes"
+        },
+        {
+          "doc_codigo": "248510",
+          "doc_nome": "Alexandre Miguel Barbosa Valle de Carvalho"
+        }
+      ],
+      "turma_sigla": "2MEIC01",
+      "turmas": [{ "turma_id": 212364, "turma_sigla": "2MEIC01" }],
+      "periodo": 2
+    },
+    {
+      "dia": 5,
+      "hora_inicio": 61200,
+      "ucurr_sigla": "IASV",
+      "ocorrencia_id": 502623,
+      "tipo": "TP",
+      "aula_id": 6105559,
+      "aula_duracao": 2,
+      "sala_sigla": "B006",
+      "salas": [{ "espaco_id": 73463, "espaco_nome": "B006" }],
+      "doc_sigla": "AAS+RPR",
+      "docentes": [
+        { "doc_codigo": "209500", "doc_nome": "Ant\u00F3nio Augusto de Sousa" },
+        { "doc_codigo": "466668", "doc_nome": "Rui Pedro Amaral Rodrigues" }
+      ],
+      "turma_sigla": "PRODEI02",
+      "turmas": [{ "turma_id": 212384, "turma_sigla": "PRODEI02" }],
+      "periodo": 2
+    }
+  ]
+}

@@ -11,15 +11,17 @@ export default function parse(data: string) {
         
         const start = Math.floor(unit.hora_inicio / 60);
         const end = start + unit.aula_duracao * 60; // 60 = 1 hour in minutes
-
+        
+        const course = unit.ucurr_sigla;
         const type: ScheduleUnitTypes = unit.tipo;
+        const teachersAbbreviation = unit.doc_sigla;
         const teachers: ScheduleTeacher[] = unit.docentes.map((t) => ({ id: t.doc_codigo, name: t.doc_nome }));
         const classes: ScheduleClass[] = unit.turmas.map((t) => ({ id: t.turma_id, name: t.turma_sigla }));
         
         const day = daysOfTheWeek[unit.dia - 1];
-        const courseName = unit.ucurr_sigla;
+        const courseId = unit.ocorrencia_id;
         
-        schedule.addUnit(day, courseName, { start, end, type, teachers, classes });
+        schedule.addUnit(day, courseId, { start, end, course, type, teachersAbbreviation, teachers, classes });
     }
 
     return schedule;

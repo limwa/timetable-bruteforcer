@@ -15,14 +15,16 @@ export type ScheduleClass = {
 export type ScheduleUnit = {
   start: number;
   end: number;
+  course: string;
+  teachersAbbreviation: string;
   type: ScheduleUnitTypes;
   teachers: ScheduleTeacher[];
   classes: ScheduleClass[];
 };
 
-export class Schedule implements Iterable<[DayOfTheWeek, Map<string, ScheduleUnit[]>]> {
+export class Schedule implements Iterable<[DayOfTheWeek, Map<number, ScheduleUnit[]>]> {
 
-    public schedule: Map<DayOfTheWeek, Map<string, ScheduleUnit[]>>;
+    private schedule: Map<DayOfTheWeek, Map<number, ScheduleUnit[]>>;
     
     constructor() {
         this.schedule = new Map();
@@ -32,20 +34,18 @@ export class Schedule implements Iterable<[DayOfTheWeek, Map<string, ScheduleUni
         return this.schedule.entries();
     }
     
-    public addUnit(day: DayOfTheWeek, courseName: string, unit: ScheduleUnit) {
-        if (this.overlaps(day, unit)) return false;
-
+    public addUnit(day: DayOfTheWeek, courseId: number, unit: ScheduleUnit) {
         if (!this.schedule.has(day)) {
             this.schedule.set(day, new Map());
         }
     
         const daySchedule = this.schedule.get(day)!
 
-        if (!daySchedule.has(courseName)) {
-            daySchedule.set(courseName, []);
+        if (!daySchedule.has(courseId)) {
+            daySchedule.set(courseId, []);
         }
 
-        const unitSchedule = daySchedule.get(courseName)!;
+        const unitSchedule = daySchedule.get(courseId)!;
         
         let index;
         for (index = 0; index < unitSchedule.length; index++) {
@@ -57,37 +57,43 @@ export class Schedule implements Iterable<[DayOfTheWeek, Map<string, ScheduleUni
         return true;
     }
 
-    public overlaps(day: DayOfTheWeek, unit: ScheduleUnit) {
-        if (!this.isValidInformation(unit)) throw new Error("Invalid unit");
-        if (!this.schedule.has(day)) return false;
 
-        const daySchedule = this.schedule.get(day)!;
-        for (const courseSchedule of daySchedule.values()) {
-            for (const otherUnit of courseSchedule) {
 
-                const { start, end } = unit;
-                const { start: otherStart, end: otherEnd } = otherUnit;
-
-                // For two lines to not overlap, one of the following must be true:
-                // 1. The start and end of the one line is before the start of the other line
-                // 2. The start and end of the one line is after the end of the other line
-
-                const noOverlap = (start < otherStart && end <= otherStart) || (start >= otherEnd && end > otherEnd);
-                if (!noOverlap) return true;                
-            }
-        }
-        
-        return false;
+    public validate() {
+        return DailySchedule.fromSchedule(this) && true; 
     }
 
-    public filter(courseName: string) {
+    public merge(other: Schedule) {
+        const newSchedule = new Schedule();
+
+        for (const [day, daySchedule] of this.schedule) {
+            for (const [courseId, courseSchedule] of daySchedule) {
+                for (const unit of courseSchedule) {
+                    newSchedule.addUnit(day, courseId, unit);
+                }
+            }
+        }
+
+        for (const [day, daySchedule] of other.schedule) {
+            for (const [courseId, courseSchedule] of daySchedule) {
+                for (const unit of courseSchedule) {
+                    newSchedule.addUnit(day, courseId, unit);
+                }
+            }
+        }
+
+        return newSchedule;
+    }
+
+    public filterByClassId(classId: number) {
         const filteredSchedule = new Schedule();
 
         for (const [day, daySchedule] of this.schedule) {
-            if (daySchedule.has(courseName)) {
-                const units = daySchedule.get(courseName)!;
-                for (const unit of units) {
-                    filteredSchedule.addUnit(day, courseName, unit);
+            for (const [courseId, courseSchedule] of daySchedule) {
+                for (const unit of courseSchedule) {
+                    if (unit.classes.some((v) => v.id === classId)) {
+                        filteredSchedule.addUnit(day, courseId, unit);
+                    }
                 }
             }
         }
@@ -98,5 +104,61 @@ export class Schedule implements Iterable<[DayOfTheWeek, Map<string, ScheduleUni
     private isValidInformation(information: ScheduleUnit) {
         const { start, end } = information;
         return start < end;
+    }
+}
+
+export class DailySchedule implements Iterable<[DayOfTheWeek, ScheduleUnit[]]> {
+
+    private schedule: Map<DayOfTheWeek, ScheduleUnit[]>;
+
+    constructor() {
+        this.schedule = new Map();
+    }
+
+    [Symbol.iterator]() {
+        return this.schedule.entries();
+    }
+
+    public get(day: DayOfTheWeek): ScheduleUnit[] | undefined {
+        return this.schedule.get(day);
+    }
+
+    public static fromSchedule(schedule: Schedule) {
+        const result = new DailySchedule();
+
+        for (const [day, daySchedule] of schedule) {
+
+            const dayResult: ScheduleUnit[] = [];
+
+            const it = daySchedule.entries();
+            let current = it.next();
+
+            while (!current.done) {
+                let ptr = 0;
+
+                const [_, courseSchedule] = current.value;
+                
+                for (const unit of courseSchedule) {
+                    while (ptr < dayResult.length && dayResult[ptr].start < unit.start) {
+                        ptr++;
+                    }
+
+                    const previous = ptr > 0 ? dayResult[ptr - 1] : null;
+                    const next = ptr < dayResult.length ? dayResult[ptr] : null;
+
+                    if (previous && previous.end > unit.start || next && next.start < unit.end) {
+                        return false;
+                    }
+
+                    dayResult.splice(ptr, 0, unit);
+                }
+
+                current = it.next();
+            }
+
+            result.schedule.set(day, dayResult);
+        }
+
+        return result;
     }
 }

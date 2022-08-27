@@ -1,4 +1,3 @@
-// https://sigarra.up.pt/feup/pt/MOB_val_geral.autentica?pv_login=202008169&pv_password=
 import { withAuthentication } from "../../cookies.ts";
 import parseAuthentication from "../../../parser/authentication/api/mod.ts";
 

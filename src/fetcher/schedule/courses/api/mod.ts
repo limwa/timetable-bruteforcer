@@ -1,4 +1,3 @@
-// https://sigarra.up.pt/feup/pt/MOB_hor_GERAL.ucurr?pv_ocorrencia_id=484404&pv_semana_ini=20220102&pv_semana_fim=20220102
 import { withAuthentication } from "../../../cookies.ts";
 import parseSchedule from "../../../../parser/schedule/api/mod.ts";
 

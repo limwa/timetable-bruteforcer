@@ -1,4 +1,3 @@
-// https://sigarra.up.pt/feup/pt/MOB_func_GERAL.pesquisa?pv_codigo=211847
 import { withAuthentication } from "../../../cookies.ts";
 import parseSearchResults from "../../../../parser/search/teachers/api/mod.ts";
 

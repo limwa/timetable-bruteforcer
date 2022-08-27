@@ -1,4 +1,3 @@
-// https://sigarra.up.pt/feup/pt/MOB_UCURR_GERAL.PESQUISA?pv_uc_sigla=AED
 import { withAuthentication } from "../../../cookies.ts";
 import parseSearchResults from "../../../../parser/search/courses/api/mod.ts";
 

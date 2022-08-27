@@ -1,4 +1,3 @@
-// https://sigarra.up.pt/feup/pt/MOB_hor_GERAL.docente?pv_codigo=211847&pv_semana_ini=20220101&pv_semana_fim=20220108
 import { withAuthentication } from "../../../cookies.ts";
 import parseSchedule from "../../../../parser/schedule/api/mod.ts";
 

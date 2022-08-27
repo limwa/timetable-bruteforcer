@@ -22,7 +22,7 @@ export type ScheduleUnit = {
 
 export class Schedule implements Iterable<[DayOfTheWeek, Map<string, ScheduleUnit[]>]> {
 
-    private schedule: Map<DayOfTheWeek, Map<string, ScheduleUnit[]>>;
+    public schedule: Map<DayOfTheWeek, Map<string, ScheduleUnit[]>>;
     
     constructor() {
         this.schedule = new Map();
@@ -77,7 +77,7 @@ export class Schedule implements Iterable<[DayOfTheWeek, Map<string, ScheduleUni
             }
         }
         
-        return true;
+        return false;
     }
 
     public filter(courseName: string) {

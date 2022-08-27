@@ -3,11 +3,15 @@ import { withAuthentication } from "../../cookies.ts";
 import parseAuthentication from "../../../parser/authentication/api/mod.ts";
 
 export function authenticate(username: string, password: string) {
-    const url = new URL("https://sigarra.up.pt/feup/pt/MOB_val_geral.autentica");
-    url.searchParams.set("pv_login", username);
-    url.searchParams.set("pv_password", password);
+    const url = new URL("https://sigarra.up.pt/feup/pt/MOB_VAL_GERAL.AUTENTICA");
 
-    return withAuthentication(url.toString())
+    return withAuthentication(url.toString(), {
+        method: "POST",
+        body: new URLSearchParams({
+            pv_login: username,
+            pv_password: password,
+        }),
+    })
         .then((response) => response.text())
         .then(parseAuthentication)
 }

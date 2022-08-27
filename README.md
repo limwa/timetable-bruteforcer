@@ -22,5 +22,9 @@ If you don't want to install Deno directly on your PC, you can use the Dockerfil
 
 ```bash
 docker build -t timetable-bruteforcer .
-docker run -it -v $PWD/config:/usr/app/config -v $PWD/output:/usr/app/output timetable-bruteforcer
+docker run -it \
+  -v $PWD/config:/usr/app/config \
+  -v $PWD/output:/usr/app/output \
+  -v $PWD/.env:/usr/app/.env \
+  timetable-bruteforcer
 ```

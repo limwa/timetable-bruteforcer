@@ -11,7 +11,7 @@ export const teachers: TeachersConfig = {
         "tbs",
     ],
     "IPC": [
-        "RPR"
+        "RPR",
     ],
     "RC": [
         "FBT",

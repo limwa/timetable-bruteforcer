@@ -11,6 +11,7 @@ import { Course } from "./parser/search/courses/types.d.ts";
 import { teachers as config, start, end } from "../config/mod.ts";
 import { getCourseSchedule } from "./fetcher/schedule/courses/api/mod.ts";
 import { daysOfTheWeek } from "./utils/days.ts";
+import { numberSetw2 } from "./utils/numberSetw.ts";
 
 type BruteforcerTeacher = Teacher;
 type BruteforcerClass = ScheduleClass & {
@@ -226,7 +227,7 @@ if (import.meta.main) {
 
       for (let i = start; i <= end; i += 30) {
         const row = [];
-        row.push(`${Math.floor(i / 60)}:${Math.floor(i % 60)} - ${Math.floor((i + 30) / 60)}:${Math.floor((i + 30) % 60)}`);
+        row.push(`${numberSetw2(Math.floor(i / 60))}:${numberSetw2(Math.floor(i % 60))} - ${numberSetw2(Math.floor((i + 30) / 60))}:${numberSetw2(Math.floor((i + 30) % 60))}`);
 
         for (const day of daysOfTheWeek) {
           const daySchedule = dailySchedule.get(day);

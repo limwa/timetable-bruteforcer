@@ -201,6 +201,7 @@ if (import.meta.main) {
     }
   }
 
+  Deno.removeSync("./output", { recursive: true });
   Deno.mkdirSync("./output", { recursive: true });
 
   let count = 1;

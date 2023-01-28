@@ -177,7 +177,7 @@ if (import.meta.main) {
     for (const [_day, daySchedule] of schedule) {
       const dailyCourseSchedule = daySchedule.get(course.id)!;
       for (const { type, teachers, classes } of dailyCourseSchedule) {
-        if (type !== "TP" && type !== "PL") continue;
+        if (type !== "TP" && type !== "PL" && type !== "OT") continue;
 
         if (teachers.some((v) => course.wantedTeachers.hasKey(v.id))) {
           for (const classInfo of classes) {

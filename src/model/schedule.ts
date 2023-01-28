@@ -1,6 +1,6 @@
 import { DayOfTheWeek } from "../utils/days.ts";
 
-export type ScheduleUnitTypes = "T" | "TP" | "PL";
+export type ScheduleUnitTypes = "T" | "TP" | "PL" | "OT";
 
 export type ScheduleTeacher = {
     id: string;

@@ -7,7 +7,7 @@ export const schema = z.object({
             hora_inicio: z.number().gte(0).lte(24 * 3600), // 24 hours
             ucurr_sigla: z.string(),
             ocorrencia_id: z.number(),
-            tipo: z.enum(["T", "TP", "PL"]),
+            tipo: z.enum(["T", "TP", "PL", "OT"]),
             aula_duracao: z.number().gt(0),
             doc_sigla: z.string(),
             docentes: z.array(

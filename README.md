@@ -1,6 +1,6 @@
 # Timetable Bruteforcer
 
-This tool automatically fetches timetables from SIGARRA and builds schedules that fulfil your requirements.
+This tool automatically fetches timetables from SIGARRA and builds schedules that fulfill your requirements.
 
 ## How to use
 

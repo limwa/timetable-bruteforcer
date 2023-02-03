@@ -204,6 +204,23 @@ if (import.meta.main) {
   Deno.removeSync("./output", { recursive: true });
   Deno.mkdirSync("./output", { recursive: true });
 
+  const report = Deno.openSync("./output/report.csv", { create: true, write: true });
+  const encoder = new TextEncoderStream();
+  encoder.readable.pipeTo(report.writable);
+
+  const writer = encoder.writable.getWriter();
+  writer.write("Option");
+  for (const [_, course] of courses) {
+    writer.write(`,${course.abbreviation},`);
+  }
+
+  writer.write('\n');
+  for (const _ of courses) {
+    writer.write(',Teacher,Class');
+  }
+
+  writer.write('\n');
+
   let count = 1;
   for (const combination of combinations(options)) {
     let schedule = new Schedule();
@@ -214,6 +231,25 @@ if (import.meta.main) {
 
     if (schedule.validate()) {
       const dailySchedule = DailySchedule.fromSchedule(schedule) as DailySchedule;
+
+      writer.write(`${count}`);
+      for (const [_, course] of courses) {
+        const teachers: string[] = [];
+        for (const [_, dailySchedule] of course.wantedClasses.byKey(combination.get(course.id)!)!.schedule) {
+          for (const [_, units] of dailySchedule) {
+            for (const unit of units) {
+              if (unit.type !== "TP" && unit.type !== "PL" && unit.type !== "OT") continue;
+
+              for (const teacher of unit.teachers) {
+                teachers.push(course.wantedTeachers.byKey(teacher.id)!.abbreviation);
+              }
+            }
+          }
+        }
+
+        writer.write(`,${teachers.join("/")},${course.wantedClasses.byKey(combination.get(course.id)!)!.name}`);
+      }
+      writer.write('\n');
 
       let start = 999999, end = 0;
       for (const [_day, daySchedule] of dailySchedule) {
@@ -259,4 +295,5 @@ if (import.meta.main) {
     }
   }
 
+  await writer.close();
 }

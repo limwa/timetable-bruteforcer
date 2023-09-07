@@ -13,7 +13,7 @@ To execute the tool, you need to:
 3. Execute the following command:
 
 ```bash
-deno run --unstable src/main.ts
+deno run src/main.ts
 ```
 
 ## With Docker

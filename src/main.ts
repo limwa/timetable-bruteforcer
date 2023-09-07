@@ -1,5 +1,5 @@
 import * as env from "https://deno.land/std@0.153.0/dotenv/mod.ts";
-import { Select } from "https://deno.land/x/cliffy@v0.24.3/prompt/mod.ts";
+import { Select } from "https://deno.land/x/cliffy@v0.25.7/prompt/mod.ts";
 import { authenticate } from "./fetcher/authentication/api/mod.ts";
 import { getTeachersByAbbreviation } from "./fetcher/search/teachers/api/mod.ts";
 import { getCoursesByAbreviation } from "./fetcher/search/courses/api/mod.ts";
@@ -201,10 +201,15 @@ if (import.meta.main) {
     }
   }
 
-  Deno.removeSync("./output", { recursive: true });
+  try {
+    Deno.removeSync("./output", { recursive: true })
+  } catch (_) {
+    // If the directory doesn't exist, it's fine
+  }
+
   Deno.mkdirSync("./output", { recursive: true });
 
-  const report = Deno.openSync("./output/report.csv", { create: true, write: true });
+  const report = Deno.openSync("./output/report.csv", { create: true, write: true, truncate: true });
   const encoder = new TextEncoderStream();
   encoder.readable.pipeTo(report.writable);
 

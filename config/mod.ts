@@ -3,8 +3,8 @@ type TeachersConfig = {
     [key: string]: string[]
 }
 
-export const start = "20221008";
-export const end = "20221015";
+export const start = "20230911";
+export const end = "20231216";
 
 export const teachers: TeachersConfig = {
     "LBAW": [

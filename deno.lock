@@ -1,0 +1,15 @@
+{
+  "version": "2",
+  "remote": {},
+  "npm": {
+    "specifiers": {
+      "@total-typescript/ts-reset": "@total-typescript/ts-reset@0.5.1"
+    },
+    "packages": {
+      "@total-typescript/ts-reset@0.5.1": {
+        "integrity": "sha512-AqlrT8YA1o7Ff5wPfMOL0pvL+1X+sw60NN6CcOCqs658emD6RfiXhF7Gu9QcfKBH7ELY2nInLhKSCWVoNL70MQ==",
+        "dependencies": {}
+      }
+    }
+  }
+}

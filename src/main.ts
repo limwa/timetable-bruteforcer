@@ -1,5 +1,8 @@
-import * as env from "https://deno.land/std@0.153.0/dotenv/mod.ts";
-import { Select } from "https://deno.land/x/cliffy@v0.25.7/prompt/mod.ts";
+import { cliffy } from "@/deps.ts";
+const { Select } = cliffy;
+
+import * as env from "./env.ts";
+
 import { authenticate } from "./fetcher/authentication/api/mod.ts";
 import { getTeachersByAbbreviation } from "./fetcher/search/teachers/api/mod.ts";
 import { getCoursesByAbreviation } from "./fetcher/search/courses/api/mod.ts";
@@ -12,6 +15,7 @@ import { teachers as config, start, end } from "../config/mod.ts";
 import { getCourseSchedule } from "./fetcher/schedule/courses/api/mod.ts";
 import { daysOfTheWeek } from "./utils/days.ts";
 import { numberSetw2 } from "./utils/numberSetw.ts";
+
 
 type BruteforcerTeacher = Teacher;
 type BruteforcerClass = ScheduleClass & {
@@ -126,7 +130,7 @@ function* combinations<T extends string | number, U>(options: Map<T, U[]>): Gene
 
 // Learn more at https://deno.land/manual/examples/module_metadata#concepts
 if (import.meta.main) {
-  const vars = env.configSync();
+  const vars = await env.load();
   
   const username = vars.SI_USERNAME;
   const password = vars.SI_PASSWORD;

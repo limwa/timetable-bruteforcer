@@ -7,21 +7,24 @@ export const start = "20230911";
 export const end = "20231216";
 
 export const teachers: TeachersConfig = {
-    "LBAW": [
-        "tbs",
+    "AC": [
+        "CMMOPS",
     ],
-    "IPC": [
-        "RPR",
+    "DS": [
+        "FFC",
+        "AMA",
+        "JPD",
     ],
-    "RC": [
-        "FBT",
+    "PRI": [
+        "SSN",
+        "JPMD",
+        "SFCF"
     ],
-    "FSI": [
-        "BLFP",
-        "MBB",
+    "SDLE": [
+        "CMFB-M",
     ],
-    "PFL": [
-        "JPSFF",
-        "GMLTL",
+    "SGI": [
+        "TCCM",
+        "AVC",
     ],
 };

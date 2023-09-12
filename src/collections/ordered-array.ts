@@ -98,4 +98,11 @@ export class OrderedArray<T> implements Iterable<T> {
   public [Symbol.iterator]() {
     return this.array[Symbol.iterator]();
   }
+
+  public clone() {
+    const cloned = new OrderedArray<T>(this.compare);
+    cloned.array = [...this.array];
+    
+    return cloned;
+  }
 }

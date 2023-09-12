@@ -1,6 +1,6 @@
-import { fetchWithAuthentication } from "@/sigarra/fetcher/client.ts";
-import { throwIfNotOk } from "@/sigarra/fetcher/utils.ts";
-import parseSchedule from "@/sigarra/parsers/schedule/api/mod.ts";
+import { fetchWithAuthentication } from "@/sigarra/client.ts";
+import { throwIfNotOk } from "@/sigarra/utils.ts";
+import parseSchedule from "@/sigarra/api/parsers/schedule.ts";
 
 export function getClassSchedule(classId: string, start: string, end: string) {
     const url = new URL("https://sigarra.up.pt/feup/pt/MOB_HOR_GERAL.TURMA");
@@ -8,7 +8,7 @@ export function getClassSchedule(classId: string, start: string, end: string) {
     url.searchParams.set("pv_semana_ini", start);
     url.searchParams.set("pv_semana_fim", end);
 
-    return fetchWithAuthentication(url.toString())
+    return fetchWithAuthentication(url)
         .then(throwIfNotOk)
         .then((response) => response.json())
         .then(parseSchedule);

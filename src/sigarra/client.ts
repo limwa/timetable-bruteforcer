@@ -11,8 +11,13 @@ const fetchWithCustomUserAgent: typeof fetch = (input, init) =>
         },
     });
 
+const fetchWithLogging: typeof fetch = (input, init) => {
+    console.log(`${init?.method ?? 'GET'} ${input.toString()}`);
+    return fetchWithCustomUserAgent(input, init);
+}
+
 export const cookieJar = new CookieJar();
 export const fetchWithAuthentication = wrapFetch({
   cookieJar,
-  fetch: fetchWithCustomUserAgent,
+  fetch: fetchWithLogging,
 });

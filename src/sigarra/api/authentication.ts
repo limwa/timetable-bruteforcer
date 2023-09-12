@@ -1,6 +1,6 @@
-import { fetchWithAuthentication } from "@/sigarra/fetcher/client.ts";
-import { throwIfNotOk } from "@/sigarra/fetcher/utils.ts";
-import parseAuthentication from "@/sigarra/parser/authentication/api/mod.ts";
+import { fetchWithAuthentication } from "@/sigarra/client.ts";
+import { throwIfNotOk } from "@/sigarra/utils.ts";
+import parseAuthentication from "@/sigarra/api/parsers/authentication.ts";
 
 export function authenticate(username: string, password: string) {
     const url = new URL("https://sigarra.up.pt/feup/pt/MOB_VAL_GERAL.AUTENTICA");

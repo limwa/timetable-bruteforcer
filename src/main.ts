@@ -1,78 +1,9 @@
-import * as env from "https://deno.land/std@0.153.0/dotenv/mod.ts";
-import { Select } from "https://deno.land/x/cliffy@v0.25.7/prompt/mod.ts";
-import { authenticate } from "./fetcher/authentication/api/mod.ts";
-import { getTeachersByAbbreviation } from "./fetcher/search/teachers/api/mod.ts";
-import { getCoursesByAbreviation } from "./fetcher/search/courses/api/mod.ts";
+import { cliffy } from "@/deps.ts";
+const { Select } = cliffy;
 
-import { DailySchedule, Schedule, ScheduleClass } from "./model/schedule.ts";
-import { Teacher } from "./parser/search/teachers/types.d.ts";
-import { Course } from "./parser/search/courses/types.d.ts";
-
-import { teachers as config, start, end } from "../config/mod.ts";
-import { getCourseSchedule } from "./fetcher/schedule/courses/api/mod.ts";
-import { daysOfTheWeek } from "./utils/days.ts";
-import { numberSetw2 } from "./utils/numberSetw.ts";
-
-type BruteforcerTeacher = Teacher;
-type BruteforcerClass = ScheduleClass & {
-  schedule: Schedule;
-};
-type BruteforcerCourse = Course & {
-  abbreviation: string;
-  wantedTeachers: BruteforcerRecord<BruteforcerTeacher>;
-  wantedClasses: BruteforcerRecord<BruteforcerClass>;
-};
-
-class BruteforcerRecord<T extends Record<string, unknown>> implements Iterable<[unknown, T]> {
-
-  private key: string;
-  private values: Map<unknown, T>;
-
-  private index: Map<string, Map<unknown, unknown>>;
-
-  constructor(key: string, indices: string[]) {
-    this.key = key;
-    this.values = new Map();
-
-    this.index = new Map();
-    for (const index of indices) {
-      this.index.set(index, new Map());
-    }
-  }
-
-  [Symbol.iterator]() {
-    return this.values.entries();
-  }
-
-  public byKey(key: unknown) {
-    return this.values.get(key);
-  }
-
-  public by(index: string, value: unknown) {
-    if (!this.index.has(index)) throw new Error(`Cannot index by ${index}`);
-    const correspondence = this.index.get(index)!;
-    const key = correspondence.get(value);
-
-    if (!key) return undefined;
-    return this.values.get(key);
-  }
-
-  public push(value: T) {
-    for(const [indexKey, index] of this.index) {
-      index.set(value[indexKey], value[this.key]);
-    }
-
-    return this.values.set(value[this.key], value);
-  }
-
-  public hasKey(key: unknown) {
-    return this.values.has(key);
-  }
-
-  public has(index: string, value: T) {
-    return this.index.get(index)?.has(value) ?? false;
-  }
-}
+import * as env from "@/env.ts";
+import * as api from "@/sigarra/api/mod.ts";
+import * as config from "../config/mod.ts";
 
 async function selectTeacherFromList(teachers: Teacher[], abbreviation: string, courseName: string){
   if (teachers.length === 1) return teachers[0];
@@ -126,12 +57,12 @@ function* combinations<T extends string | number, U>(options: Map<T, U[]>): Gene
 
 // Learn more at https://deno.land/manual/examples/module_metadata#concepts
 if (import.meta.main) {
-  const vars = env.configSync();
+  const vars = await env.load();
   
   const username = vars.SI_USERNAME;
   const password = vars.SI_PASSWORD;
 
-  const result = await authenticate(username, password);
+  const result = await api.authenticate(username, password);
   if (!result.authenticated) {
     console.error("Login failed. Please update your .env file.");
     throw new Error(result.error);

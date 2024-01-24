@@ -1,14 +1,6 @@
-export type DayOfTheWeek =
-  | "monday"
-  | "tuesday"
-  | "wednesday"
-  | "thursday"
-  | "friday"
-  | "saturday"
-  | "sunday";
-
+export type DayOfTheWeek = typeof daysOfTheWeek[number];
   
-export const daysOfTheWeek: DayOfTheWeek[] = [
+export const daysOfTheWeek = [
     "sunday",
     "monday",
     "tuesday",
@@ -16,4 +8,4 @@ export const daysOfTheWeek: DayOfTheWeek[] = [
     "thursday",
     "friday",
     "saturday",
-];
+] as const;

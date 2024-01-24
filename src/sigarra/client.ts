@@ -12,7 +12,7 @@ const fetchWithCustomUserAgent: typeof fetch = (input, init) =>
     });
 
 const fetchWithLogging: typeof fetch = (input, init) => {
-    console.log(`${init?.method ?? 'GET'} ${input.toString()}`);
+    console.error(`${init?.method ?? 'GET'} ${input.toString()}`);
     return fetchWithCustomUserAgent(input, init);
 }
 

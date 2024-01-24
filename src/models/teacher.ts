@@ -9,4 +9,8 @@ export class Teacher {
         this.name = name;
         this.abbreviation = abbreviation;
     }
+
+    public toString() {
+        return `[${this.abbreviation}] ${this.name}`;
+    }
 }

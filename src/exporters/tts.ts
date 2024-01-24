@@ -1,5 +1,5 @@
-import { Schedule } from "../model/schedule.ts";
+import { Schedule } from "@/models/schedule.ts";
 
-export function exportSchedule(schedule: Schedule, index: number) {
+// export function tts(schedule: Schedule, index: number) {
 
-}
+// }

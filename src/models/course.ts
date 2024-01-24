@@ -11,4 +11,8 @@ export class Course {
         this.year = year;
         this.name = name;
     }
+
+    public toString() {
+        return `[${this.code}] ${this.name} (${this.year} / ${this.year + 1})`;
+    }
 }

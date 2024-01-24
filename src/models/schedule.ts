@@ -8,6 +8,7 @@ export class Schedule {
 
     constructor() {
         const compareUnits = (a: Unit, b: Unit) => a.start - b.start;
+
         const entries = daysOfTheWeek
             .map(day => [day, new OrderedArray(compareUnits)] as const);
 
@@ -56,13 +57,8 @@ export class Schedule {
     }
 
     public merge(other: Schedule) {
-        const merged = new Schedule();
-
-        for (const [day, units] of merged) {
-            units.addAll(this.days[day]);
+        for (const [day, units] of this) {
             units.addAll(other.days[day]);
         }
-
-        return merged;
     }
 }

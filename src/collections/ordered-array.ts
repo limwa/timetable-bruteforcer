@@ -7,8 +7,8 @@ export class OrderedArray<T> implements Iterable<T> {
     return this.array.length;
   }
 
-  public get(index: number) {
-    return this.array[index];
+  public at(index: number) {
+    return this.array.at(index);
   }
 
   public remove(index: number) {

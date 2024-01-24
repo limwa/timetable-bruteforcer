@@ -72,7 +72,11 @@
 //                     newSchedule.addUnit(day, courseId, unit);
 //                 }
 //             }
-//         }
+//         }if ()
+    Deno.mkdirSync(directory, { recursive: true });
+    return (schedule, index) => {
+
+    }
 
 //         for (const [day, daySchedule] of other.schedule) {
 //             for (const [courseId, courseSchedule] of daySchedule) {
